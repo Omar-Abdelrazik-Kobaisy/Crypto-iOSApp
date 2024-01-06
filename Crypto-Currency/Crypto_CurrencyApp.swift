@@ -11,7 +11,10 @@ import SwiftUI
 struct Crypto_CurrencyApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                HomeView()
+                    .toolbar(.hidden, for: .navigationBar)
+            }
         }
     }
 }
