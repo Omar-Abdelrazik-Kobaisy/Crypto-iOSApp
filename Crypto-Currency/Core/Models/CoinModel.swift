@@ -120,6 +120,10 @@ struct CoinModel: Identifiable, Codable{
     var currentHoldingPrice: Double{
         (currentHoldings ?? 0) * (currentPrice ?? 0)
     }
+    
+    var rank: Int{
+        Int(marketCapRank ?? 0)
+    }
 }
 
 // MARK: - SparklineIn7D
