@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     //MARK: properties
     @State private var isShowingPortfolio: Bool = false
+    @EnvironmentObject var vm: HomeViewModel
     var body: some View {
         ZStack{
             //MARK: background Layer
@@ -18,7 +19,24 @@ struct HomeView: View {
             //MARK: content Layer
             VStack{
                 homeHeader
-                Spacer()
+                ScrollView{
+                    if isShowingPortfolio{
+                        VStack {
+                            ForEach(vm.livePriceCoins, content: {coin in
+                                CoinRowView(coin: coin, showHoldingsColumn: isShowingPortfolio)
+                            })
+                        }
+                        .transition(.move(edge: .trailing))
+                    }else{
+                        VStack {
+                            ForEach(vm.livePriceCoins, content: {coin in
+                                CoinRowView(coin: coin, showHoldingsColumn: isShowingPortfolio)
+                            })
+                        }
+                        .transition(.move(edge: .leading))
+                    }
+                }
+                .padding(.horizontal)
             }
         }
     }
@@ -30,6 +48,7 @@ struct HomeView_Previews: PreviewProvider {
             HomeView()
                 .toolbar(.hidden, for: .navigationBar)
         }
+        .environmentObject(dev.vm)
     }
 }
 

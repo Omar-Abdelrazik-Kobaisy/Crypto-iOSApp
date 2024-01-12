@@ -9,12 +9,14 @@ import SwiftUI
 
 @main
 struct Crypto_CurrencyApp: App {
+    @StateObject private var vm = HomeViewModel()
     var body: some Scene {
         WindowGroup {
             NavigationView {
                 HomeView()
                     .toolbar(.hidden, for: .navigationBar)
             }
+            .environmentObject(vm)
         }
     }
 }
