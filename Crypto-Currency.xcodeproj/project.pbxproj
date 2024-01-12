@@ -20,6 +20,7 @@
 		07B864CF2B49DAFE0092ACEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07B864CE2B49DAFE0092ACEA /* Assets.xcassets */; };
 		07B864D22B49DAFE0092ACEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07B864D12B49DAFE0092ACEA /* Preview Assets.xcassets */; };
 		07B864DA2B49DD070092ACEA /* Color+EXT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B864D92B49DD070092ACEA /* Color+EXT.swift */; };
+		07D8375D2B51D4B9009B778A /* AllCoinList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07D8375C2B51D4B9009B778A /* AllCoinList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +38,7 @@
 		07B864CE2B49DAFE0092ACEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07B864D12B49DAFE0092ACEA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		07B864D92B49DD070092ACEA /* Color+EXT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+EXT.swift"; sourceTree = "<group>"; };
+		07D8375C2B51D4B9009B778A /* AllCoinList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCoinList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			children = (
 				0794D7432B49E944008ED117 /* HomeView.swift */,
 				07553DAA2B4D04BC00AEEB4B /* CoinRowView.swift */,
+				07D8375C2B51D4B9009B778A /* AllCoinList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -230,6 +233,7 @@
 			files = (
 				07553DAD2B4D098E00AEEB4B /* Double+EXT.swift in Sources */,
 				074F65782B4FA6FA0070ED3F /* HomeViewModel.swift in Sources */,
+				07D8375D2B51D4B9009B778A /* AllCoinList.swift in Sources */,
 				07553DAB2B4D04BC00AEEB4B /* CoinRowView.swift in Sources */,
 				07B864DA2B49DD070092ACEA /* Color+EXT.swift in Sources */,
 				0794D7442B49E944008ED117 /* HomeView.swift in Sources */,

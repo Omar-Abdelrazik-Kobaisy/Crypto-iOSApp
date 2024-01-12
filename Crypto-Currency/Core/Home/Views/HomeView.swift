@@ -19,20 +19,15 @@ struct HomeView: View {
             //MARK: content Layer
             VStack{
                 homeHeader
+                columnTitle
                 ScrollView{
                     if isShowingPortfolio{
-                        VStack {
-                            ForEach(vm.livePriceCoins, content: {coin in
-                                CoinRowView(coin: coin, showHoldingsColumn: isShowingPortfolio)
-                            })
-                        }
+                        AllCoinList(coins: vm.livePriceCoins,
+                                    isShowingPortfolio: isShowingPortfolio)
                         .transition(.move(edge: .trailing))
                     }else{
-                        VStack {
-                            ForEach(vm.livePriceCoins, content: {coin in
-                                CoinRowView(coin: coin, showHoldingsColumn: isShowingPortfolio)
-                            })
-                        }
+                        AllCoinList(coins: vm.portfolioCoins,
+                                    isShowingPortfolio: isShowingPortfolio)
                         .transition(.move(edge: .leading))
                     }
                 }
@@ -77,4 +72,20 @@ extension HomeView{
             }
             .padding(.horizontal)
     }
+    private var columnTitle: some View{
+            HStack{
+                Text("Coin")
+                    .frame(maxWidth: .infinity,alignment: .leading)
+                if isShowingPortfolio{
+                    Text("Holdings")
+                        .frame(maxWidth: .infinity,alignment: .leading)
+                }
+                Text("Price")
+            }
+            .frame(maxWidth: .infinity)
+            .font(.system(.body,design: .rounded,weight: .regular))
+            .foregroundColor(.theme.secondaryText)
+            .padding(.horizontal)
+    }
 }
+

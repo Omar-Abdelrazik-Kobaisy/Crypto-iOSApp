@@ -9,11 +9,12 @@ import Foundation
 
 class HomeViewModel: ObservableObject{
     @Published var livePriceCoins: [CoinModel] = []
-    @Published var PortfolioCoins: [CoinModel] = []
+    @Published var portfolioCoins: [CoinModel] = []
     
     init(){
         DispatchQueue.main.async {
             self.livePriceCoins.append(DeveloperPreview.instance.coin)
+            self.portfolioCoins.append(DeveloperPreview.instance.coin)
         }
         
     }
