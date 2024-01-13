@@ -22,11 +22,11 @@ struct HomeView: View {
                 columnTitle
                 ScrollView{
                     if isShowingPortfolio{
-                        AllCoinList(coins: vm.livePriceCoins,
+                        AllCoinList(coins: vm.allCoins,
                                     isShowingPortfolio: isShowingPortfolio)
                         .transition(.move(edge: .trailing))
                     }else{
-                        AllCoinList(coins: vm.portfolioCoins,
+                        AllCoinList(coins: vm.allCoins,
                                     isShowingPortfolio: isShowingPortfolio)
                         .transition(.move(edge: .leading))
                     }
