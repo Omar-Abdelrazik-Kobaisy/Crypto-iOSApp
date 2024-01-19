@@ -42,12 +42,15 @@ extension CoinRowView{
             Text("\(coin.rank)")
                 .font(.headline)
                 .foregroundColor(.theme.secondaryText)
+                .frame(width: 25,alignment: .leading)
             Circle()
                 .frame(width:30,height: 30)
             Text((coin.symbol ?? "noSymbol").uppercased())
                 .font(.headline)
                 .foregroundColor(.theme.accent)
+                .frame(maxWidth: .infinity,alignment: .leading)
         }
+        .frame(maxWidth: .infinity,alignment: .leading)
     }
     
     private var centerCoulmn: some View{
@@ -70,6 +73,6 @@ extension CoinRowView{
                         .theme.green : .theme.red
                 )
         }
-        .frame(width: UIScreen.main.bounds.width / 3.5, alignment: .trailing)
+        .frame(width: UIScreen.main.bounds.width / 3, alignment: .trailing)
     }
 }

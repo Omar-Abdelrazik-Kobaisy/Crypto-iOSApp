@@ -19,6 +19,7 @@ struct AllCoinList: View {
                             showHoldingsColumn: isShowingPortfolio)
             })
         }
+        .padding(.horizontal)
     }
 }
 

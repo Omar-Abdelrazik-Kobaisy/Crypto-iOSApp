@@ -11,35 +11,20 @@ class HomeViewModel: ObservableObject{
 //    @Published var livePriceCoins: [CoinModel] = []
 //    @Published var portfolioCoins: [CoinModel] = []
     @Published var allCoins: [CoinModel] = []
-    private let dataService: CoinDataServiceProtocol
-//    var coinSubscription: AnyCancellable?
+    private let dataService: CoinDataService
     var cancel = Set<AnyCancellable>()
     
-    init(dataService: CoinDataServiceProtocol = CoinDataService()){
+    init(dataService: CoinDataService = CoinDataService()){
         self.dataService = dataService
         addSubscribers()
-//        DispatchQueue.main.async {[weak self] in
-//            self?.livePriceCoins.append(DeveloperPreview.instance.coin)
-//            self?.portfolioCoins.append(DeveloperPreview.instance.coin)
-//        }
     }
     
     func addSubscribers(){
-        dataService.getCoins()
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("Successfully Decoded data into CoinModel")
-                case .failure(let error):
-                    print("can't decode data into CoinModel ->"+error.localizedDescription)
-                }
-            } receiveValue: {[weak self] coins in
+        dataService.$allCoins
+            .sink {[weak self] coins in
                 guard let self else{return}
                 self.allCoins = coins
-                print(self.allCoins)
-//                self.coinSubscription?.cancel()
             }
             .store(in: &cancel)
-
     }
 }

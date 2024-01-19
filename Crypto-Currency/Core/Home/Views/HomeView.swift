@@ -13,10 +13,10 @@ struct HomeView: View {
     @EnvironmentObject var vm: HomeViewModel
     var body: some View {
         ZStack{
-            //MARK: background Layer
+            //MARK: 1- background Layer
             Color.theme.background
                 .ignoresSafeArea()
-            //MARK: content Layer
+            //MARK: 2- content Layer
             VStack{
                 homeHeader
                 columnTitle
@@ -31,7 +31,6 @@ struct HomeView: View {
                         .transition(.move(edge: .leading))
                     }
                 }
-                .padding(.horizontal)
             }
         }
     }
@@ -60,17 +59,17 @@ extension HomeView{
                 Text(isShowingPortfolio ? "Portfolio" : "Live Prices")
                     .font(.system(.headline,weight: .heavy))
                     .foregroundColor(.theme.accent)
-                    .frame(width: 220)
+                    .frame(width: 150)
                     .animation(.none, value: UUID())
-                CircleButtonView(iconName: "chevron.right")
-                    .rotationEffect(.degrees(isShowingPortfolio ? 180 : 0))
-                    .onTapGesture {
-                        withAnimation(.spring()) {
-                            isShowingPortfolio.toggle()
-                        }
+                Button {
+                    withAnimation(.spring()) {
+                        isShowingPortfolio.toggle()
                     }
+                } label: {
+                    CircleButtonView(iconName: "chevron.right")
+                        .rotationEffect(.degrees(isShowingPortfolio ? 180 : 0))
+                }
             }
-            .padding(.horizontal)
     }
     private var columnTitle: some View{
             HStack{
