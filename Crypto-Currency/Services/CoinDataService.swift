@@ -12,8 +12,10 @@ import Combine
 class CoinDataService {
     
     @Published var allCoins: [CoinModel] = []
+    var networkManager: NetworkProtocol
     var coinSubscription: AnyCancellable?
-    init(){
+    init(networkManager: NetworkProtocol = NetworkManager()){
+        self.networkManager = networkManager
         getCoins()
     }
     func getCoins(){
@@ -22,31 +24,12 @@ class CoinDataService {
             return
         }
         
-        coinSubscription = URLSession.shared.dataTaskPublisher(for: url)
-            .subscribe(on: DispatchQueue.global(qos: .background))
-            .receive(on: DispatchQueue.main)
-            .tryMap { output in
-                guard let response = output.response as? HTTPURLResponse,
-                      (200...299).contains(response.statusCode) else{
-                    print("inValid Response")
-                    throw URLError(.badServerResponse)
-                }
-                print("🚀-> "+output.response.debugDescription)
-                return output.data
-            }
+        coinSubscription = networkManager.download(fromURL: url)
             .decode(type: [CoinModel].self, decoder: JSONDecoder())
-            .sink { completion in
-                switch completion {
-                case .finished:
-                    print("Successfully Decoded data into CoinModel")
-                case .failure(let error):
-                    print("can't decode data into CoinModel ->"+error.localizedDescription)
-                }
-            } receiveValue: {[weak self] coins in
+            .sink(receiveCompletion: networkManager.handleCompletion(completion:), receiveValue: {[weak self] coins in
                 guard let self else{return}
                 self.allCoins = coins
                 self.coinSubscription?.cancel()
-            }
-
+            })
     }
 }
