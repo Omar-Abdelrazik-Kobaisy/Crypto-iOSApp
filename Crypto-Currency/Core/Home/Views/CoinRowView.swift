@@ -38,11 +38,11 @@ struct CoinRowView_Previews: PreviewProvider {
 extension CoinRowView{
     
     private var leftColumn: some View{
-        HStack{
+        HStack(spacing:3){
             Text("\(coin.rank)")
                 .font(.headline)
                 .foregroundColor(.theme.secondaryText)
-                .frame(width: 25,alignment: .leading)
+                .frame(width: 28,alignment: .leading)
             Circle()
                 .frame(width:30,height: 30)
             Text((coin.symbol ?? "noSymbol").uppercased())
