@@ -41,9 +41,11 @@ extension CoinRowView{
         HStack(spacing:3){
             Text("\(coin.rank)")
                 .font(.headline)
+                .lineLimit(1)
+                .minimumScaleFactor(0.4)
                 .foregroundColor(.theme.secondaryText)
-                .frame(width: 28,alignment: .leading)
-            Circle()
+                .frame(width: 22,alignment: .leading)
+            CoinImageView(coin: coin)
                 .frame(width:30,height: 30)
             Text((coin.symbol ?? "noSymbol").uppercased())
                 .font(.headline)

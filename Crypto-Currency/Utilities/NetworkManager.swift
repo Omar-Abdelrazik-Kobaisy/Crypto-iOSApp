@@ -15,13 +15,16 @@ protocol NetworkProtocol{
 class NetworkManager: NetworkProtocol{
     
     enum NetworkingError: LocalizedError{
-        case badURLResponse(url: URL)
+        case invalidResponse
+        case badURLResponse(url: URL, statusCode: Int)
         case unKnown
         
         var errorDescription: String?{
             switch self{
-            case .badURLResponse(let url):
-                return "[🔥] bad Response from URL: \(url)"
+            case .invalidResponse:
+                return "[🧨] invalid Response"
+            case .badURLResponse(let url, let statusCode):
+                return "[🔥] bad Response from URL: \(url),\n statusCode: \(statusCode)"
             case .unKnown:
                 return "[🐸] UnKnown Erro Occured"
             }
@@ -33,12 +36,13 @@ class NetworkManager: NetworkProtocol{
             .subscribe(on: DispatchQueue.global(qos: .background))
             .receive(on: RunLoop.main)
             .tryMap { output in
-                guard let response = output.response as? HTTPURLResponse,
-                      (200...299).contains(response.statusCode) else{
-                    print("inValid Response")
-                    throw NetworkingError.badURLResponse(url: url)
+                guard let response = output.response as? HTTPURLResponse else {
+                    throw NetworkingError.invalidResponse
                 }
-                print("🚀-> "+output.response.debugDescription)
+                guard (200...299).contains(response.statusCode) else{
+                    throw NetworkingError.badURLResponse(url: url, statusCode: response.statusCode)
+                }
+                print("🚀-> "+response.debugDescription)
                 return output.data
             }
             .eraseToAnyPublisher()
