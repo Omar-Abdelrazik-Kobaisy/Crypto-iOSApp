@@ -22,6 +22,7 @@ struct ContentView: View {
                     .foregroundColor(.theme.red)
                 Text("Green Color")
                     .foregroundColor(.theme.green)
+                CoinImageView(coin: DeveloperPreview.instance.coin)
             }
             .font(.largeTitle)
         }
