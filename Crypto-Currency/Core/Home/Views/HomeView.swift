@@ -19,6 +19,7 @@ struct HomeView: View {
             //MARK: 2- content Layer
             VStack{
                 homeHeader
+                SearchBarView(text: $vm.searchedText)
                 columnTitle
                 ScrollView{
                     if isShowingPortfolio{
@@ -33,6 +34,9 @@ struct HomeView: View {
                 }
             }
             //MARK: 2- End(content Layer)
+        }
+        .onTapGesture {
+            UIApplication.shared.dismissKeyBoard()
         }
     }
 }
