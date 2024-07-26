@@ -12,10 +12,7 @@ struct HomeView: View {
     @State private var isShowingPortfolio: Bool = false
     @EnvironmentObject var vm: HomeViewModel
     var body: some View {
-        ZStack{
-            //MARK: 1- background Layer
-            Color.theme.background
-                .ignoresSafeArea()
+        BaseView{
             //MARK: 2- content Layer
             VStack{
                 homeHeader
